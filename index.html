@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brownie Bear Café</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Serif+Display:ital@0;1&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!--NAVBAR-->
+  <nav id="navbar">
+    <div class="nav-logo" onclick="showPage('home')">
+      <span>🐻</span> Brownie Bear
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home'); scrollToSection('about')">About</a></li>
+      <li><a onclick="showPage('menu')">Menu</a></li>
+      <li><a onclick="showPage('home'); scrollToSection('contact')">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <!-- Logged-in user pill -->
+      <div class="user-indicator" id="userIndicator">
+        <div class="user-dot"></div>
+        <span id="userNameDisplay"></span>
+        <button class="btn-logout" onclick="logout()">✕ logout</button>
+      </div>
+      <!-- Auth buttons (hidden when logged in) -->
+      <button class="btn-nav btn-login"    id="loginBtn"    onclick="openAuthModal('login')">Login</button>
+      <button class="btn-nav btn-register" id="registerBtn" onclick="openAuthModal('register')">Register</button>
+      <!-- Cart icon -->
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒
+        <div class="cart-badge" id="cartBadge">0</div>
+      </button>
+    </div>
+  </nav>
+  <!-- TOAST NOTIFICATIONS -->
+  <div class="toast-container" id="toastContainer"></div>
+  <!-- PAGE: HOME -->
+  <div id="home" class="page active">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-particles" id="heroParticles"></div>
+      <div class="floating-elements">
+        <div class="float-el" style="top:15%; left:8%;  animation-duration:6s;   animation-delay:0s;">☕</div>
+        <div class="float-el" style="top:70%; left:5%;  animation-duration:7s;   animation-delay:1s;">🧋</div>
+        <div class="float-el" style="top:25%; right:6%; animation-duration:5.5s; animation-delay:0.5s;">🍰</div>
+        <div class="float-el" style="top:65%; right:8%; animation-duration:8s;   animation-delay:1.5s;">🌸</div>
+        <div class="float-el" style="top:45%; left:3%;  animation-duration:6.5s; animation-delay:2s;">🍫</div>
+        <div class="float-el" style="top:40%; right:4%; animation-duration:7.5s; animation-delay:0.8s;">✿</div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">✿ Est. 2019 — Warmth in every sip ✿</div>
+        <h1 class="hero-title">
+          Where every cup
+          <em>tells a story</em>
+        </h1>
+        <p class="hero-subtitle">
+          A cozy corner of handcrafted drinks, dreamy desserts, and soulful bites — brewed with love and a dusting of magic.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary"   onclick="showPage('menu')">Explore Menu</button>
+          <button class="btn-secondary" onclick="scrollToSection('about')">Our Story</button>
+        </div>
+      </div>
+      <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+    <!-- FEATURES STRIP -->
+    <div class="features-strip">
+      <div class="feature-item">
+        <span class="feature-icon">🌿</span>
+        <div class="feature-title">Organic &amp; Fresh</div>
+        <div class="feature-desc">Hand-picked ingredients sourced from local farms every morning.</div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">✦</span>
+        <div class="feature-title">Artisan Crafted</div>
+        <div class="feature-desc">Every drink is a small masterpiece, brewed with intention.</div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🐾</span>
+        <div class="feature-title">Pet Friendly</div>
+        <div class="feature-desc">Bring your furry companion — we love all creatures equally.</div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🌙</span>
+        <div class="feature-title">Open Late</div>
+        <div class="feature-desc">Monday–Sunday, 8am to midnight. Your late-night refuge.</div>
+      </div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" style="background: var(--brown-darkest);">
+      <div class="about-section">
+        <div class="about-visual">
+          <div class="about-card">
+            <div class="about-card-accent"></div>
+            <div class="about-stat">12K+</div>
+            <div class="about-stat-label">Happy Bears Served</div>
+            <div class="about-divider"></div>
+            <div class="about-stat">47</div>
+            <div class="about-stat-label">Signature Creations</div>
+            <div class="about-divider"></div>
+            <div class="about-stat">5 ★</div>
+            <div class="about-stat-label">Average Rating</div>
+          </div>
+        </div>
+        <div>
+          <div class="section-tag">✿ Our story</div>
+          <h2 class="section-title">Born from a <em>love of warmth</em></h2>
+          <p class="section-body">
+            Brownie Bear started as a tiny dream in a small brown kitchen — a place where every visitor would feel like they'd come home. We believe food is not just fuel; it's feeling, memory, and magic poured into a cup.
+          </p>
+          <p class="section-body">
+            Our menu is a love letter to comfort: silky boba pearls, pour-over coffees, cloud-light pastries, and heartwarming mains — all made with ingredients that carry stories of their own.
+          </p>
+          <button class="btn-primary" style="margin-top: 1rem;" onclick="showPage('menu')">See Our Menu →</button>
+        </div>
+      </div>
+    </section>
+    <!-- MENU PREVIEW -->
+    <section class="menu-preview">
+      <div class="menu-preview-inner">
+        <div class="section-header">
+          <div class="section-tag">✿ What we offer</div>
+          <h2 class="section-title" style="font-size:2.5rem;">A taste of <em>everything lovely</em></h2>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-preview-card" onclick="showPage('menu')">
+            <span class="menu-card-icon">🧋</span>
+            <div class="menu-card-title">Boba Drinks</div>
+            <div class="menu-card-desc">5 dreamy tapioca pearl creations, from classic milk tea to taro clouds.</div>
+          </div>
+          <div class="menu-preview-card" onclick="showPage('menu')">
+            <span class="menu-card-icon">☕</span>
+            <div class="menu-card-title">Specialty Coffee</div>
+            <div class="menu-card-desc">6 artisan coffee preparations from single-origin beans.</div>
+          </div>
+          <div class="menu-preview-card" onclick="showPage('menu')">
+            <span class="menu-card-icon">🍮</span>
+            <div class="menu-card-title">Desserts</div>
+            <div class="menu-card-desc">4 soul-warming sweets to pair with your favourite drink.</div>
+          </div>
+          <div class="menu-preview-card" onclick="showPage('menu')">
+            <span class="menu-card-icon">🍕</span>
+            <div class="menu-card-title">Continental</div>
+            <div class="menu-card-desc">Pizzas, pastas, and hearty mains crafted with rustic charm.</div>
+          </div>
+          <div class="menu-preview-card" onclick="showPage('menu')">
+            <span class="menu-card-icon">🥗</span>
+            <div class="menu-card-title">Starters</div>
+            <div class="menu-card-desc">Light bites and appetizers to begin your bear-worthy feast.</div>
+          </div>
+          <div class="menu-preview-card" onclick="showPage('menu')">
+            <span class="menu-card-icon">🍛</span>
+            <div class="menu-card-title">Main Course</div>
+            <div class="menu-card-desc">Hearty mains that warm the soul and fill the heart.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- CONTACT SECTION -->
+    <section id="contact" style="background: var(--brown-dark); padding: 7rem 4rem;">
+      <div class="contact-section" style="padding: 0; max-width: 900px; margin: 0 auto;">
+        <div class="section-tag">✿ Get in touch</div>
+        <h2 class="section-title">We'd love to <em>hear from you</em></h2>
+        <p class="section-body" style="max-width:500px; margin: 0 auto 0.5rem;">
+          Drop by for a chat, send us a note, or follow our daily specials — we're always here, warm cup in hand.
+        </p>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="contact-card-icon">📍</div>
+            <div class="contact-card-label">Find Us</div>
+            <div class="contact-card-value">12 Bear Lane, Cozy Quarter, Mumbai 400001</div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">🕐</div>
+            <div class="contact-card-label">Hours</div>
+            <div class="contact-card-value">Mon–Sun: 8:00 AM – 12:00 AM</div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">📱</div>
+            <div class="contact-card-label">Call Us</div>
+            <div class="contact-card-value">+91 98765 43210</div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-input" placeholder="Bear Friend">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" placeholder="hello@browniebear.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Tell us something sweet..."></textarea>
+          </div>
+          <button class="btn-primary" onclick="showToast('✉️ Message sent! We\'ll reply soon 🐻')">Send Message</button>
+        </div>
+      </div>
+    </section>
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-logo">🐻 Brownie Bear Café</div>
+      <div class="footer-tagline">"Where warmth is the secret ingredient."</div>
+      <div class="footer-links">
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('home'); scrollToSection('about')">About</a>
+        <a onclick="showPage('menu')">Menu</a>
+        <a onclick="showPage('home'); scrollToSection('contact')">Contact</a>
+      </div>
+      <div class="footer-copy">© 2024 Brownie Bear Café. Made with ♥ and a lot of coffee.</div>
+    </footer>
+  </div>
+  <!-- END #home -->
+
+  <!--PAGE: MENU -->
+  <div id="menu" class="page">
+    <div class="menu-hero">
+      <div class="section-tag">✿ Our offerings</div>
+      <h1 class="section-title" style="font-size: clamp(2.5rem, 6vw, 4.5rem);">The Bear <em>Menu</em></h1>
+      <p class="section-body" style="max-width:500px; margin: 0 auto; text-align: center;">
+        Every item is crafted with love, care, and just a tiny bear hug.
+      </p>
+    </div>
+    <!-- Sticky category filter bar -->
+    <div class="menu-categories" id="menuCategories">
+      <button class="cat-btn active" onclick="filterMenu('all', this)">All Items</button>
+      <button class="cat-btn" onclick="filterMenu('boba', this)">🧋 Boba</button>
+      <button class="cat-btn" onclick="filterMenu('coffee', this)">☕ Coffee</button>
+      <button class="cat-btn" onclick="filterMenu('dessert', this)">🍮 Desserts</button>
+      <button class="cat-btn" onclick="filterMenu('continental', this)">🍕 Continental</button>
+      <button class="cat-btn" onclick="filterMenu('starter', this)">🥗 Starters</button>
+      <button class="cat-btn" onclick="filterMenu('main', this)">🍛 Main Course</button>
+    </div>
+    <!-- Item grid — populated by renderMenu() in app.js -->
+    <div class="menu-content" id="menuContent"></div>
+  </div>
+  <!-- END #menu -->
+  <!-- PAGE: PAYMENT -->
+  <div id="payment" class="page">
+    <div class="payment-container">
+      <!-- Order summary -->
+      <div class="payment-summary">
+        <div class="payment-summary-title">🛒 Order Summary</div>
+        <div id="paymentItems"></div>
+        <div class="summary-total">
+          <span>Total</span>
+          <span id="paymentTotal">₹0</span>
+        </div>
+      </div>
+      <!-- Payment form -->
+      <div class="payment-form" id="paymentFormContainer">
+        <div id="paymentFormView">
+          <div class="payment-title">Complete Payment</div>
+          <div class="payment-sub">Secure checkout • All transactions encrypted</div>
+          <!-- Payment method tabs -->
+          <div class="payment-methods">
+            <div class="pay-method active" onclick="selectPayMethod(this)">
+              <span class="pay-method-icon">💳</span>
+              <span class="pay-method-label">Card</span>
+            </div>
+            <div class="pay-method" onclick="selectPayMethod(this)">
+              <span class="pay-method-icon">📱</span>
+              <span class="pay-method-label">UPI</span>
+            </div>
+            <div class="pay-method" onclick="selectPayMethod(this)">
+              <span class="pay-method-icon">🏦</span>
+              <span class="pay-method-label">Net Banking</span>
+            </div>
+          </div>
+          <!-- Live card visual -->
+          <div class="card-visual">
+            <span class="card-chip">📟</span>
+            <div class="card-number-display" id="cardNumDisplay">•••• •••• •••• ••••</div>
+            <div class="card-bottom">
+              <div>
+                <div class="card-label">Card Holder</div>
+                <div class="card-value" id="cardHolderDisplay">YOUR NAME</div>
+              </div>
+              <div>
+                <div class="card-label">Expires</div>
+                <div class="card-value" id="cardExpDisplay">MM/YY</div>
+              </div>
+            </div>
+          </div>
+          <!-- Card fields -->
+          <div class="form-group">
+            <label class="form-label">Card Number</label>
+            <input type="text" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19"
+              oninput="formatCard(this); document.getElementById('cardNumDisplay').textContent = this.value || '•••• •••• •••• ••••'">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Card Holder Name</label>
+              <input type="text" class="form-input" placeholder="Full Name"
+                oninput="document.getElementById('cardHolderDisplay').textContent = this.value.toUpperCase() || 'YOUR NAME'">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Expiry</label>
+              <input type="text" class="form-input" placeholder="MM/YY" maxlength="5"
+                oninput="document.getElementById('cardExpDisplay').textContent = this.value || 'MM/YY'">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">CVV</label>
+            <input type="password" class="form-input" placeholder="•••" maxlength="3">
+          </div>
+          <button class="btn-primary" style="width:100%; margin-top: 0.5rem;" onclick="processPayment()">
+            Pay <span id="payBtnAmount"></span> Now →
+          </button>
+        </div>
+        <!-- Success screen -->
+        <div class="payment-success" id="paymentSuccess">
+          <div class="success-icon">🎉</div>
+          <div class="confetti-line">🐻 ✿ ☕ 🧁 ✦</div>
+          <div class="success-title">Order Placed!</div>
+          <div class="success-sub">
+            Your order is confirmed and will be ready shortly.<br>
+            Thank you for choosing Brownie Bear Café! 🐾
+          </div>
+          <button class="btn-primary" onclick="showPage('home'); clearCart()">Back to Home</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- END #payment -->
+
+  <!-- CART OVERLAY + DRAWER-->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <div class="cart-title">🛒 Your Order</div>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🧺</div>
+        <div class="cart-empty-text">Your basket is empty</div>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount" id="cartTotal">₹0</span>
+      </div>
+      <button class="btn-checkout" onclick="goToCheckout()">Proceed to Checkout →</button>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeAuthModal()">✕</button>
+      <div class="modal-logo">🐻</div>
+      <div class="modal-title">Welcome Back</div>
+      <div class="modal-sub">Join the Brownie Bear family</div>
+      <div class="modal-tabs">
+        <button class="modal-tab active" onclick="switchAuthTab('login')">Login</button>
+        <button class="modal-tab"        onclick="switchAuthTab('register')">Register</button>
+      </div>
+      <!-- Login Form -->
+      <div class="auth-form active" id="loginForm">
+        <div class="auth-error"   id="loginError"></div>
+        <div class="auth-success" id="loginSuccess"></div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="loginEmail" placeholder="you@browniebear.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" id="loginPassword" placeholder="••••••••">
+        </div>
+        <button class="btn-auth" onclick="handleLogin()">Sign In →</button>
+        <div class="auth-divider">or new here?</div>
+        <button class="btn-secondary" style="width:100%; padding:0.8rem;" onclick="switchAuthTab('register')">
+          Create an Account
+        </button>
+      </div>
+      <!-- Register Form -->
+      <div class="auth-form" id="registerForm">
+        <div class="auth-error"   id="registerError"></div>
+        <div class="auth-success" id="registerSuccess"></div>
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="registerName" placeholder="Bear Friend">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="registerEmail" placeholder="you@browniebear.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" id="registerPassword" placeholder="Min 6 characters">
+        </div>
+        <button class="btn-auth" onclick="handleRegister()">Create Account →</button>
+      </div>
+
+    </div>
+  </div>
+  <!-- END AUTH MODAL -->
+  <!-- JavaScript — loaded last so DOM is ready -->
+  <script src="app.js"></script>
+</body>
+</html>
